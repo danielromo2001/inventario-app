@@ -18,6 +18,14 @@ htmlcov/
 /dist/
 /Output/
 
+# Scripts opcionales para empaquetar y crear el instalador
+/ROMO Inventario.spec
+/construir_exe.bat
+/instalador.iss
+
 # Archivos temporales del sistema
 Thumbs.db
 Desktop.ini
+
+# Archivo local creado accidentalmente
+/exit
