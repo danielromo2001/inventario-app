@@ -1,0 +1,23 @@
+# Entorno virtual
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Cachés y cobertura de pruebas
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Archivos generados por PyInstaller e Inno Setup
+/build/
+/dist/
+/Output/
+
+# Archivos temporales del sistema
+Thumbs.db
+Desktop.ini
