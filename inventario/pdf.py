@@ -33,7 +33,8 @@ def pesos(valor: int) -> str:
 
 def generar_factura_pdf(ruta: Path, negocio: str, numero: str, fecha: str,
                         cliente: str, items: list[dict], total: int,
-                        direccion: str = "", telefono: str = "", logo: Path | None = None) -> None:
+                        direccion: str = "", telefono: str = "", logo: Path | None = None,
+                        nit: str = "", correo: str = "") -> None:
     _registrar_fuentes()
     ancho, alto = A4
     M = 18 * mm  # margen lateral
@@ -50,13 +51,15 @@ def generar_factura_pdf(ruta: Path, negocio: str, numero: str, fecha: str,
         c.saveState()
         c.setStrokeColor(LINEA)
         c.setLineWidth(0.8)
-        c.line(M, 22 * mm, ancho - M, 22 * mm)
+        c.line(M, 26 * mm, ancho - M, 26 * mm)
         c.setFillColor(OSCURO)
         c.setFont("Poppins-Medium", 10.5)
-        c.drawCentredString(ancho / 2, 15 * mm, "Gracias por su compra")
+        c.drawCentredString(ancho / 2, 19 * mm, "Gracias por su compra")
         c.setFillColor(GRIS)
         c.setFont("Poppins-Light", 9)
-        c.drawCentredString(ancho / 2, 10 * mm, f"{negocio}  ·  {direccion}  ·  Tel: {telefono}")
+        c.drawCentredString(ancho / 2, 14 * mm, f"{negocio}  ·  {direccion}  ·  Tel: {telefono}")
+        if correo:
+            c.drawCentredString(ancho / 2, 9.5 * mm, f"Correo: {correo}")
         c.restoreState()
 
     def primera(c, doc):
@@ -73,6 +76,10 @@ def generar_factura_pdf(ruta: Path, negocio: str, numero: str, fecha: str,
             c.setFont("Poppins-Bold", 20)
             c.drawString(M, top - 8 * mm, negocio)
             base = top - 14 * mm
+        if nit:
+            c.setFillColor(OSCURO)
+            c.setFont("Poppins-Medium", 10.5)
+            c.drawString(M, base - 6.5 * mm, f"NIT. {nit}")
         x = ancho - M
         c.setFillColor(GRIS)
         c.setFont("Poppins-Medium", 10)
@@ -85,15 +92,15 @@ def generar_factura_pdf(ruta: Path, negocio: str, numero: str, fecha: str,
         c.drawRightString(x, top - 23 * mm, fecha)
         c.setStrokeColor(NARANJA)
         c.setLineWidth(1.4)
-        c.line(M, base - 6 * mm, ancho - M, base - 6 * mm)
+        c.line(M, base - 10.5 * mm, ancho - M, base - 10.5 * mm)
         c.restoreState()
         pie(c, doc)
 
     doc = SimpleDocTemplate(str(ruta), pagesize=A4, leftMargin=M, rightMargin=M,
-                            topMargin=16 * mm, bottomMargin=30 * mm, title=f"Factura {numero}",
+                            topMargin=16 * mm, bottomMargin=34 * mm, title=f"Factura {numero}",
                             author=negocio)
 
-    espacio_cabecera = 30 * mm
+    espacio_cabecera = 34 * mm
     historia = [Spacer(1, espacio_cabecera + 12 * mm),
                 Paragraph("CLIENTE", etiqueta),
                 Paragraph(cliente, cliente_est),

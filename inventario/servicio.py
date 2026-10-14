@@ -273,7 +273,7 @@ class Inventario:
                 generar_factura_pdf(ruta_pdf, config.NOMBRE_NEGOCIO, numero,
                                     fecha.strftime("%d/%m/%Y %H:%M"), cliente, lineas, total,
                                     config.DIRECCION_NEGOCIO, config.TELEFONO_NEGOCIO,
-                                    config.RUTA_LOGO)
+                                    config.RUTA_LOGO, config.NIT_NEGOCIO, config.CORREO_NEGOCIO)
             except Exception as e:
                 log.exception("Falló la creación del PDF")
                 raise ErrorArchivo(

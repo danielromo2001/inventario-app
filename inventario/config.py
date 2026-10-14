@@ -9,6 +9,8 @@ COPIAS_A_CONSERVAR = 15  # copias de seguridad diarias que se guardan
 NOMBRE_NEGOCIO = "ROMO El Rincón del Lubricante"
 DIRECCION_NEGOCIO = "Carrera 4 #7-05, barrio San Luis"
 TELEFONO_NEGOCIO = "300 299 3614"
+NIT_NEGOCIO = "52783275-7"
+CORREO_NEGOCIO = "marimo210581@gmail.com"
 RUTA_LOGO = Path(__file__).parent / "assets" / "logo_marca.png"  # pon None para factura sin logo
 
 
