@@ -1,6 +1,11 @@
 import os
 from pathlib import Path
 
+VERSION = "1.1"  # subir al publicar cambios (y igualar AppVersion en instalador.iss)
+try:
+    from .build_info import COMPILACION  # lo escribe construir_exe.bat al empaquetar
+except ImportError:
+    COMPILACION = "desarrollo"
 UMBRAL_STOCK_BAJO = 3  # avisar cuando queden 3 unidades o menos
 MAX_NOMBRE = 120
 MAX_PRECIO = 100_000_000

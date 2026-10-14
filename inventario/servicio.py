@@ -3,6 +3,7 @@ import functools
 import logging
 import re
 import sqlite3
+import time
 from datetime import date, datetime
 from pathlib import Path
 
@@ -39,6 +40,16 @@ def _protegido(f):
                 f"No se pudo leer o guardar un archivo ({e.strerror or e}). Revisa que el disco "
                 "tenga espacio libre y que la carpeta de la aplicación no esté protegida.") from e
     return envoltura
+
+
+def _borrar_archivo(ruta: Path, intentos: int = 6) -> None:
+    """Borra un archivo reintentando: en Windows el antivirus puede tenerlo bloqueado un instante."""
+    for _ in range(intentos):
+        try:
+            ruta.unlink(missing_ok=True)
+            return
+        except OSError:
+            time.sleep(0.25)
 
 
 def _validar(nombre, precio, cantidad):
@@ -288,10 +299,7 @@ class Inventario:
             except sqlite3.Error:
                 pass
             if ruta_pdf is not None:
-                try:
-                    ruta_pdf.unlink(missing_ok=True)  # no dejar PDFs de ventas que no existen
-                except OSError:
-                    pass
+                _borrar_archivo(ruta_pdf)  # no dejar PDFs de ventas que no existen
             raise
 
         carrito.vaciar()

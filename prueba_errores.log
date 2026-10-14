@@ -1,0 +1,39 @@
+Falló la creación del PDF
+Traceback (most recent call last):
+  File "C:\Users\danfe\Documents\inventario_app\inventario\servicio.py", line 284, in confirmar_venta
+    generar_factura_pdf(ruta_pdf, config.NOMBRE_NEGOCIO, numero,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        fecha.strftime("%d/%m/%Y %H:%M"), cliente, lineas, total,
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        config.DIRECCION_NEGOCIO, config.TELEFONO_NEGOCIO,
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        config.RUTA_LOGO, config.NIT_NEGOCIO, config.CORREO_NEGOCIO)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\danfe\Documents\inventario_app\prueba_errores.py", line 26, in falla
+    Path(ruta).write_bytes(b"%PDF parcial"); raise PermissionError("disco lleno")
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: disco lleno
+Error de base de datos en listar_productos
+Traceback (most recent call last):
+  File "C:\Users\danfe\Documents\inventario_app\inventario\servicio.py", line 24, in envoltura
+    return f(self, *a, **k)
+  File "C:\Users\danfe\Documents\inventario_app\inventario\servicio.py", line 165, in listar_productos
+    filas = self.con.execute(
+        "SELECT * FROM productos WHERE nombre LIKE ? ORDER BY nombre", (patron,))
+sqlite3.ProgrammingError: Cannot operate on a closed database.
+OK dato inválido: El nombre del producto es obligatorio.
+OK dato inválido: El nombre es muy largo (máximo 120 caracteres).
+OK dato inválido: El precio debe ser un número entero mayor o igual a 0.
+OK dato inválido: La cantidad debe ser un número entero mayor o igual a 0.
+OK dato inválido: El precio no puede superar $100.000.000.
+OK dato inválido: El precio debe ser un número entero mayor o igual a 0.
+OK dato inválido: El precio debe ser un número entero mayor o igual a 0.
+Disponible para agregar: 1
+Problemas en carrito: ['«Aceite 20W-50»: la factura tiene 4 pero solo quedan 2.']
+OK confirmar bloqueado: «Aceite 20W-50»: la factura tiene 4 pero solo quedan 2. No se generó la factura; ajusta la cantidad.
+OK fallo PDF: No se pudo crear el PDF de la factura, así que la venta NO se registró y el inve ...
+OK venta tras recuperarse: F-000001
+OK producto eliminado: Un producto de la factura fue eliminado del inventario. Quítalo de la factura y vuelve a intentarlo.
+Respaldo: True | segundo intento mismo día: None
+OK base de datos: No se pudo completar la operación con la base de datos. Inténtalo de n ...
+TODO OK

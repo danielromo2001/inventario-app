@@ -49,6 +49,9 @@ class VentanaPrincipal(QMainWindow):
                 b.setChecked(True)
         grupo.idClicked.connect(self.stack.setCurrentIndex)
         capa_b.addStretch(1)
+        version = QLabel(f"Versión {config.VERSION}\nCompilada: {config.COMPILACION}"); version.setObjectName("subtitulo")
+        version.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        capa_b.addWidget(version)
 
         contenido = QWidget(); contenido.setObjectName("contenido")
         capa_c = QVBoxLayout(contenido); capa_c.setContentsMargins(0, 0, 0, 0)
